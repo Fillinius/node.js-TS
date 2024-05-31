@@ -1,0 +1,24 @@
+{
+  "name": "ts-node",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "npx nodemon",
+    "build": "rimraf ./dist && npx tsc",
+    "start": "npm run build && node dist/index.js"
+  },
+  "keywords": [
+    "node",
+    "TS"
+  ],
+  "author": "Vladimir",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.13",
+    "nodemon": "^3.1.2",
+    "rimraf": "^5.0.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
