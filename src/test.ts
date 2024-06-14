@@ -97,28 +97,30 @@ console.log(normalizeData(posts))
 
 const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments?_limit=3'
 
-interface RENDERPOST {
-  body: string
+interface RENDERDATA {
+  postId: number
   id: number
+  name: string
   email: string
+  body: string
 }
 
 const getData = (url: string): Promise<Response> => {
   return fetch(url)
 }
 
-function renderData(posts: RENDERPOST[]): void {
+function renderData(posts: RENDERDATA[]): void {
   posts.forEach((comment) => {
     console.log('ID:', comment.id, 'Email:', comment.email)
   })
 }
 
 getData(COMMENTS_URL)
-  .then((response: Response) => {
-    return response.json()
-  })
-  .then((data: any) => {
-    renderData(data)
+  .then((response: Response) => response.json())
+  .then((data) => {
+    if (Array.isArray(data)) {
+      renderData(data)
+    }
   })
   .catch((err: Error) => console.log('err', err))
 
