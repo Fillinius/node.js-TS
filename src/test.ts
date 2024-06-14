@@ -92,3 +92,42 @@ const normalizeData = (unnormalizedData: Post[]) => {
 }
 
 console.log(normalizeData(posts))
+
+// задача №3
+
+const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments?_limit=3'
+
+interface RENDERDATA {
+  postId: number
+  id: number
+  name: string
+  email: string
+  body: string
+}
+
+const getData = (url: string): Promise<Response> => {
+  return fetch(url)
+}
+
+function renderData(posts: RENDERDATA[]): void {
+  posts.forEach((comment) => {
+    console.log('ID:', comment.id, 'Email:', comment.email)
+  })
+}
+
+getData(COMMENTS_URL)
+  .then((response: Response) => response.json())
+  .then((data) => {
+    if (Array.isArray(data)) {
+      renderData(data)
+    }
+  })
+  .catch((err: Error) => console.log('err', err))
+
+/**
+ * ID: 1, Email: Eliseo...
+ * ID: 2, Email: Jayne_Kuhic...
+ * ID: 3, Email: Nikita...
+ * ID: 4, Email: Lew...
+ * ...
+ */
